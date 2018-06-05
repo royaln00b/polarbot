@@ -33,7 +33,6 @@ async def ping(ctx):
 async def suggest(ctx,*,description):
 	await bot.add_reaction(message = ctx.message, emoji = "✅")
 	await bot.send_message(discord.utils.get(ctx.message.server.members, name='Royalnoob'),ctx.message.author.display_name+" suggested a command to be added:\n\n"+description)
-	await bot.send_message(discord.utils.get(ctx.message.server.members, name='Sesmic'),ctx.message.author.display_name+" suggested a command to be added:\n\n"+description)
 
 @bot.command(pass_context=True)   
 async def avatar(ctx,*, user:discord.Member=None):
