@@ -5,6 +5,7 @@ from discord.ext import commands
 import time
 import random
 from random import sample
+import os
 
 
 bot=commands.Bot(description="Polaris bot. This bot was brought to you by Royalnoob. Built from scratch.",command_prefix=";",pm_help=False)
