@@ -161,5 +161,5 @@ async def on_member_join(member):
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
 
-
-bot.run("NDMzMzczNjQyMzUzNjcyMTky.Da66OQ.TMe9vn3DMraKmWsXGOeqlEiYbnU")
+token = os.getenv('TOKEN')
+bot.run(token)
