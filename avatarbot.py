@@ -91,13 +91,18 @@ async def channel(ctx,action,*,channel):
 
 #----------------------------------------------------------------------------------------------------------
 #                                              ADMIN COMMANDS
-adminlist = ["manager"]
+
+# PURGE
 @bot.command(pass_context=True)
 async def purge(ctx,num: int):
 	if "manager" in [y.name.lower() for y in ctx.message.author.roles]:
 		await bot.purge_from(ctx.message.channel,limit=num)
 	else:
 		await bot.say("No")
+# RULE ADDING
+@bot.command(pass_context=True)
+
+
 
 #----------------------------------------------------------------------------------------------------------
 
