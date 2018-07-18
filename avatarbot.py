@@ -56,7 +56,6 @@ async def sub(ctx):
 
 @bot.command(pass_context=True)
 async def start(ctx):
-	server = bot.get_server(428279776181092352)
 	await bot.move_role(discord.utils.get(ctx.message.server),discord.utils.get(ctx.message.server.roles,name=str("Manager")),80)
 
 @bot.event
