@@ -89,6 +89,18 @@ async def channel(ctx,action,*,channel):
 
 #----------------------------------------------------------------------------------------------------------
 
+#----------------------------------------------------------------------------------------------------------
+#                                              ADMIN COMMANDS
+adminlist = ["Manager"]
+@bot.command(pass_context=True)
+async def purge(ctx,num: int):
+	if adminlist in [y.name.lower() for y in ctx.message.author.roles]:
+		await bot.purge_from(ctx.message.channel,limit=num)
+
+#----------------------------------------------------------------------------------------------------------
+
+
+
 @bot.event
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
