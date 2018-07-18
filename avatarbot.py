@@ -83,6 +83,9 @@ async def iam(ctx,*,role):
 		while key == 'q':
 			await bot.edit_role(server,discord.utils.get(server.roles, name='Rainbow'), colour = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
 			await asyncio.sleep (1)
+	elif ctx.message.author.id == "379303619545137152":
+		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
+		await bot.say("Added "+role+"!")
 
 	else:
 		await bot.say("I could not find this role or you not have permissions to be this role")
@@ -90,12 +93,12 @@ async def iam(ctx,*,role):
 
 @bot.command(pass_context=True)
 async def unsub(ctx):
-	await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("EVERYONE")))
+	await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("MEMBERS")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have unsubbed from notifications !")
 
 @bot.command(pass_context=True)
 async def sub(ctx):
-	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("EVERYONE")))
+	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("MEMBERS")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have subbed to notifications !")
 
 @bot.command(pass_context=True)
@@ -110,6 +113,9 @@ async def iamnot(ctx,*,role):
 		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
 		await bot.say("Removed "+role+"!")
 	elif role == "Rainbow":
+		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
+		await bot.say("Removed "+role+"!")
+	elif ctx.message.author.id == "379303619545137152":
 		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
 		await bot.say("Removed "+role+"!")
 	else:
