@@ -63,6 +63,7 @@ async def on_member_join(member):
 	server = member.server
 	fmt = '**You can stay here {0.mention} in {1.name} as long as you dont kill anyone**!'
 	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
+	await bot.add_roles(member,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 
 @bot.event
 async def on_ready():
