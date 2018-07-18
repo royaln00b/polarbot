@@ -66,7 +66,7 @@ channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","spor
 @bot.command(pass_context=True)
 async def channel(ctx,action,*,channel):
 	failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+channel+"` Could not be found. Please try again.",colour=0xFF0000)
-	goodembed=discord.Embed(title="Success!",description="You have joined the "+channel+" channels! Have fun!",colour=0x00FF00)
+	goodembed=discord.Embed(title="Success!",description="You have been"+action+"ed to/from the "+channel+" channels! Have fun!",colour=0x00FF00)
 	if action == "remove":
 		if channel in channels:
 			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
