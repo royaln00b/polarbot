@@ -75,7 +75,7 @@ async def channel(ctx,action,*,channel):
 			await bot.say(embed = failembed)
 	elif action == "add":
 		if channel in channels:
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
+			await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
 			await bot.say(embed = goodembed)
 		else:
 			await bot.say(embed = failembed)
