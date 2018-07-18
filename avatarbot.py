@@ -54,6 +54,9 @@ async def sub(ctx):
 	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have subbed to notifications !")
 
+@bot.command(pass_context=True)
+async def s(ctx):
+	await bot.move_role(ctx.message.server,discord.utils.get(ctx.message.server.roles,name=str("Manager")),3)
 
 @bot.event
 async def on_member_join(member):
