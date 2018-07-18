@@ -46,12 +46,12 @@ async def avatar(ctx,*, user:discord.Member=None):
 
 @bot.command(pass_context=True)
 async def unsub(ctx):
-	await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("MEMBERS")))
+	await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have unsubbed from notifications !")
 
 @bot.command(pass_context=True)
 async def sub(ctx):
-	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("MEMBERS")))
+	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have subbed to notifications !")
 
 
