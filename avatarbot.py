@@ -96,6 +96,8 @@ adminlist = ["Manager"]
 async def purge(ctx,num: int):
 	if adminlist in [y.name.lower() for y in ctx.message.author.roles]:
 		await bot.purge_from(ctx.message.channel,limit=num)
+	else:
+		await bot.say("No")
 
 #----------------------------------------------------------------------------------------------------------
 
