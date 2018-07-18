@@ -65,6 +65,7 @@ async def on_member_join(member):
 	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
 	await bot.add_roles(member,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 
+
 @bot.event
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
