@@ -60,7 +60,31 @@ async def on_member_join(member):
 	fmt = '**You can stay here {0.mention} in {1.name} as long as you dont kill anyone**!'
 	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
 	await bot.add_roles(member,discord.utils.get(ctx.message.server.roles,name=str("Members")))
+#----------------------------------------------------------------------------------------------------------
+#                                              AUTO ASSIGN ROLES CODE
+channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","sports"]
+failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+channel+"` Could not be found. Please try again.",colour=0xFF0000)
+goodembed=discord.Embed(title="Success!",description="You have joined the "+channel+" channels! Have fun!",colour=0x00FF00)
+@bot.command(pass_context=True)
+async def channel(ctx,action,*,channel):
+	if action == "remove":
+		if channel in channels:
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
+			await bot.say(embed = goodembed)
+		else:
+			await bot.say(embed = failembed)
+	elif action == "add":
+		if channel in channels:
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
+			await bot.say(embed = goodembed)
+		else:
+			await bot.say(embed = failembed)
+	elif action != "remove":
+		if action != "add":
+			await bot.say(embed = failembed)
+	
 
+#----------------------------------------------------------------------------------------------------------
 
 @bot.event
 async def on_ready():
