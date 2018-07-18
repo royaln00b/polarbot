@@ -15,7 +15,7 @@ bot.remove_command('help')
 
 @bot.command(pass_context=True)
 async def help(ctx):
-	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications",colour = 0xEE82EE)
+	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
 	await bot.send_message(ctx.message.author, embed=embed)
 
 @bot.command(pass_context=True)
@@ -63,10 +63,10 @@ async def on_member_join(member):
 #----------------------------------------------------------------------------------------------------------
 #                                              AUTO ASSIGN ROLES CODE
 channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","sports"]
-failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+channel+"` Could not be found. Please try again.",colour=0xFF0000)
-goodembed=discord.Embed(title="Success!",description="You have joined the "+channel+" channels! Have fun!",colour=0x00FF00)
 @bot.command(pass_context=True)
 async def channel(ctx,action,*,channel):
+	failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+channel+"` Could not be found. Please try again.",colour=0xFF0000)
+	goodembed=discord.Embed(title="Success!",description="You have joined the "+channel+" channels! Have fun!",colour=0x00FF00)
 	if action == "remove":
 		if channel in channels:
 			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
