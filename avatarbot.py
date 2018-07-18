@@ -15,7 +15,7 @@ bot.remove_command('help')
 
 @bot.command(pass_context=True)
 async def help(ctx):
-	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2 . hello - If you are lonely\n3 . iamlist - Shows what roles you can assign\n4 . iam - To add yourself to a role in the list\n5 . iamnot - Remove a role from yourself from the list\n6. unsub - Unsubscribe from notifications\n\n Admin only :\n1 . kick - Kick a member\n2 . ban - Ban a member\n3 . paint - Force a member to be a color\n4 . unpaint - Force a member out of a color",colour = 0xEE82EE)
+	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications",colour = 0xEE82EE)
 	await bot.send_message(ctx.message.author, embed=embed)
 
 @bot.command(pass_context=True)
@@ -43,53 +43,6 @@ async def avatar(ctx,*, user:discord.Member=None):
    embed.set_image(url=user.avatar_url)
    await bot.say(embed=embed)
 
-@bot.command()
-async def hello():
-	await bot.say("Hello")
-
-@bot.command()
-async def iamlist():
-	await bot.say("The current available roles are : \n - red \n - blue \n - yellow \n - Rainbow")
-
-@commands.has_role("Mod")
-@bot.command()
-async def kick(member:discord.Member):
-    await bot.kick(member)
-    
-@commands.has_role("Admin")
-@bot.command(pass_context=True)
-async def ban(ctx,member:discord.Member):
-    await bot.say('<@{}>, you have been banned'.format(member.id))
-    await asyncio.sleep(1)
-    await bot.ban(member)
-    
-@bot.command(pass_context=True)
-async def iam(ctx,*,role):
-	if role == "blue":
-		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Added "+role+"!")
-	elif role == "yellow":
-		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Added "+role+"!")
-	elif role == "red":
-		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Added "+role+"!")
-	elif role == "Rainbow":
-		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Added "+role+"!")
-		server = ctx.message.server
-		chars = '0123456789ABCDEF'
-		key = 'q'
-		while key == 'q':
-			await bot.edit_role(server,discord.utils.get(server.roles, name='Rainbow'), colour = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
-			await asyncio.sleep (1)
-	elif ctx.message.author.id == "379303619545137152":
-		await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Added "+role+"!")
-
-	else:
-		await bot.say("I could not find this role or you not have permissions to be this role")
-
 
 @bot.command(pass_context=True)
 async def unsub(ctx):
@@ -101,68 +54,12 @@ async def sub(ctx):
 	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("MEMBERS")))
 	await bot.say("<@"+str(ctx.message.author.id)+"> you have subbed to notifications !")
 
-@bot.command(pass_context=True)
-async def iamnot(ctx,*,role):
-	if role == "blue":
-		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Removed "+role+"!")
-	elif role == "yellow":
-		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Removed "+role+"!")
-	elif role == "red":
-		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Removed "+role+"!")
-	elif role == "Rainbow":
-		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Removed "+role+"!")
-	elif ctx.message.author.id == "379303619545137152":
-		await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		await bot.say("Removed "+role+"!")
-	else:
-		await bot.say("I could not find this role.")
-
-@commands.has_role("Admin")
-@bot.command(pass_context=True)
-async def paint(ctx,member:discord.Member,*,role):
-	if role == "blue":
-		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "yellow":
-		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "red":
-		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "Rainbow":
-		await bot.add_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-		server = ctx.message.server
-		chars = '0123456789ABCDEF'
-		key = 'q'
-		while key == 'q':
-			await bot.edit_role(server,discord.utils.get(server.roles, name='Rainbow'), colour = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
-			await asyncio.sleep (1)
-
-	else:
-		await bot.say("I could not find this role")
-
-
-
-@commands.has_role("Admin")
-@bot.command(pass_context=True)
-async def unpaint(ctx,member:discord.Member,*,role):
-	if role == "blue":
-		await bot.remove_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "yellow":
-		await bot.remove_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "red":
-		await bot.remove_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	elif role == "Rainbow":
-		await bot.remove_roles(member,discord.utils.get(ctx.message.server.roles, name=str(role)))
-	else:
-		await bot.say("I could not find this role.")
 
 @bot.event
 async def on_member_join(member):
 	server = member.server
 	fmt = '**You can stay here {0.mention} in {1.name} as long as you dont kill anyone**!'
-	await bot.send_message(bot.get_channel("428279776181092356"), fmt.format(member, server))
+	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
 
 @bot.event
 async def on_ready():
