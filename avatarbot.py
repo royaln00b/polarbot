@@ -61,6 +61,17 @@ async def on_member_join(member):
 	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
 	await bot.add_roles(member,discord.utils.get(ctx.message.server.roles,name=str("Members")))
 #----------------------------------------------------------------------------------------------------------
+#                                              8ball
+_8balllist = ["It is certain :8ball:","It is decidedly so :8ball:","Without a doubt :8ball:","You may rely on it :8ball:","As I see it, yes :8ball:","Most likely :8ball:","Outlook good :8ball:","Yes :8ball:","Signs point to yes :8ball:","Reply hazy try again :8ball:","Ask again later :8ball:","Better not tell you now :8ball:","Cannot predict now :8ball:","Concentrate and ask again :8ball:","Don't count on it :8ball:","My reply is no :8ball:","My sources say no :8ball:","Outlook not so good :8ball:","Very doubtful :8ball:", "Consider it a pass :8ball:", "It may happen to be true :8ball:", "It appears to be false :8ball:", "Go for it :8ball:", "Thats a small secret :8ball:", "Oh sorry I wasn't paying attention :c :8ball:", "You can bet it will be true :8ball:", "Definite yes :8ball:", "Don't count on that too much :8ball:"]
+       
+@bot.command(name="8ball",pass_context=True)
+async def _8ball(ctx):
+	await bot.say(random.choice(_8balllist))
+
+#----------------------------------------------------------------------------------------------------------
+
+
+#----------------------------------------------------------------------------------------------------------
 #                                              AUTO ASSIGN ROLES CODE
 channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","sports"]
 @bot.command(pass_context=True)
@@ -100,7 +111,7 @@ async def purge(ctx,num: int):
 	else:
 		await bot.say("No")
 # RULE ADDING
-@bot.command(pass_context=True)
+
 
 
 
