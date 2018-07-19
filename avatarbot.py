@@ -106,7 +106,7 @@ async def channel(ctx,action,*,channel):
 async def channels(ctx,*,channel=None):
 	new_list = "\n".join([x for x in channels])
 	if channel is None:
-		embed=discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:\n"----"",colour=0x)
+		embed=discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:\n"+new_list+" ",colour=0x000000)
 	
 
 #----------------------------------------------------------------------------------------------------------
