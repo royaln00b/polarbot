@@ -1,11 +1,14 @@
 import discord
 import asyncio
+import PIL
 from discord.ext.commands import Bot
 from discord.ext import commands
 import time
 import random
 from random import sample
 import os
+from PIL import Image
+
 
 
 bot=commands.Bot(description="Polaris bot. This bot was brought to you by Royalnoob. Built from scratch.",command_prefix=";",pm_help=False)
@@ -59,7 +62,7 @@ async def on_member_join(member):
 	server = member.server
 	fmt = '**You can stay here {0.mention} in {1.name} as long as you dont kill anyone**!'
 	await bot.send_message(bot.get_channel("467462021412290561"), fmt.format(member, server))
-	await bot.add_roles(member,discord.utils.get(ctx.message.server.roles,name=str("Members")))
+	await bot.add_roles(member,discord.utils.get(server.roles,name=str("Members")))
 #----------------------------------------------------------------------------------------------------------
 #                                              8ball
 _8balllist = ["It is certain :8ball:","It is decidedly so :8ball:","Without a doubt :8ball:","You may rely on it :8ball:","As I see it, yes :8ball:","Most likely :8ball:","Outlook good :8ball:","Yes :8ball:","Signs point to yes :8ball:","Reply hazy try again :8ball:","Ask again later :8ball:","Better not tell you now :8ball:","Cannot predict now :8ball:","Concentrate and ask again :8ball:","Don't count on it :8ball:","My reply is no :8ball:","My sources say no :8ball:","Outlook not so good :8ball:","Very doubtful :8ball:", "Consider it a pass :8ball:", "It may happen to be true :8ball:", "It appears to be false :8ball:", "Go for it :8ball:", "Thats a small secret :8ball:", "Oh sorry I wasn't paying attention :c :8ball:", "You can bet it will be true :8ball:", "Definite yes :8ball:", "Don't count on that too much :8ball:"]
@@ -96,6 +99,14 @@ async def channel(ctx,action,*,channel):
 	elif action != "remove":
 		if action != "add":
 			await bot.say(embed = failembed)
+
+#                                              LIST OF ALL CHANNELS THAT CAN BE ASSIGNED
+
+@bot.command(pass_context=True)
+async def channels(ctx,*,channel=None):
+	new_list = "\n".join([x for x in channels])
+	if channel is None:
+		embed=discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:\n"----"",colour=0x)
 	
 
 #----------------------------------------------------------------------------------------------------------
@@ -117,8 +128,12 @@ async def purge(ctx,num: int):
 
 #----------------------------------------------------------------------------------------------------------
 
+#----------------------------------------------------------------------------------------------------------
+#                                              TESTING PILLOW
 
 
+
+#----------------------------------------------------------------------------------------------------------
 @bot.event
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
