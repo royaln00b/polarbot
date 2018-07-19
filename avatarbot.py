@@ -21,6 +21,8 @@ async def help(ctx):
 	if ctx.message.author.id == "379303619545137152":
 		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
 		await bot.say(embed=embed)
+	else:
+		await bot.say("Hey "+ctx.message.author.mention+"! Use this -> <#469486865305698304>")
 
 @bot.command(pass_context=True)
 async def ping(ctx):
