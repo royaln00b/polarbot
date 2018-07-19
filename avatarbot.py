@@ -18,8 +18,9 @@ bot.remove_command('help')
 
 @bot.command(pass_context=True)
 async def help(ctx):
-	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
-	await bot.send_message(ctx.message.author, embed=embed)
+	if ctx.message.author.id == "379303619545137152":
+		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
+		await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -104,8 +105,8 @@ async def channel(ctx,action,*,channel):
 
 _channels2 = ["Chat","Hangout","Memes","Toxic","Fanstalk","Gaming","Trading","Sports"]
 @bot.command(pass_context=True)
-async def channels(ctx,*,channel=None):
-	if channel is None:
+async def channels(ctx):
+	if ctx.message.author.id == "379303619545137152":
 		embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n"+"\n\n".join(_channels2)+" ",colour=0x000000)
 		await bot.say(embed=embed)
 	
