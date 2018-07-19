@@ -76,7 +76,7 @@ async def _8ball(ctx):
 
 #----------------------------------------------------------------------------------------------------------
 #                                              AUTO ASSIGN ROLES CODE
-channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","sports"]
+_channels = ["chat","hangout","memes","toxic","fanstalk","gaming","trading","sports"]
 @bot.command(pass_context=True)
 async def channel(ctx,action,*,channel):
 	failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+channel+"` Could not be found. Please try again.",colour=0xFF0000)
@@ -84,14 +84,14 @@ async def channel(ctx,action,*,channel):
 	removeembed=discord.Embed(title="Success!",description="You have been removed from the "+channel+" channels! Have fun!",colour=0xBDB76B)
 	if action == "remove":
 		actions = "removed from"
-		if channel in channels:
+		if channel in _channels:
 			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
 			await bot.say(embed = removeembed)
 		else:
 			await bot.say(embed = failembed)
 	elif action == "add":
 		actions = "added to"
-		if channel in channels:
+		if channel in _channels:
 			await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(channel)))
 			await bot.say(embed = addembed)
 		else:
@@ -104,9 +104,8 @@ async def channel(ctx,action,*,channel):
 
 @bot.command(pass_context=True)
 async def channels(ctx,*,channel=None):
-	new_list = "\n".join([x for x in channels])
 	if channel is None:
-		embed=discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:\n"+new_list+" ",colour=0x000000)
+		embed=discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:\n"+_channels+" ",colour=0x000000)
 	
 
 #----------------------------------------------------------------------------------------------------------
