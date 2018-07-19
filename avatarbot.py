@@ -107,7 +107,14 @@ async def channels(ctx,*,channel=None):
 	if channel is None:
 		embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n"+"\n".join(_channels)+" ",colour=0x000000)
 		_message = await bot.say(embed=embed)
-		await bot.add_reaction(message = _message, emoji = "✅")
+		await bot.add_reaction(message = _message, emoji = "🗣")
+		await bot.add_reaction(message = _message, emoji = "👋")
+		await bot.add_reaction(message = _message, emoji = "👽")
+		await bot.add_reaction(message = _message, emoji = "🤮")
+		await bot.add_reaction(message = _message, emoji = "🤩")
+		await bot.add_reaction(message = _message, emoji = "🎮")
+		await bot.add_reaction(message = _message, emoji = "🤑")
+		await bot.add_reaction(message = _message, emoji = "🏈")
 	
 
 #----------------------------------------------------------------------------------------------------------
