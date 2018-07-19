@@ -143,6 +143,10 @@ async def purge(ctx,num: int):
 @bot.event
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
+	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n\n2. unsub - Unsubscribe from notifications\n\n3. sub - Subscribe to notifications\n\n4. channel - Choose your channels!\n  ;channel [add/remove] [channel]",colour = 0x000000)
+	await bot.send_message(469486865305698304,embed=embed)
+	embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n"+"\n\n".join(_channels2)+" ",colour=0x000000)
+	await bot.send_message(message.server.get_channel("469486865305698304"),embed=embed)
 
 token = os.getenv('TOKEN')
 bot.run(token)
