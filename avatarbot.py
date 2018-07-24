@@ -152,11 +152,18 @@ async def setmy(ctx,action,*,selection):
 #                                              LIST OF ALL CHANNELS THAT CAN BE ASSIGNED
 
 _channels2 = ["Chat","Hangout","Memes","Toxic","Fanstalk","Gaming","Trading","Sports"]
+_genders2 = ["Male", "Female", "Transgender", "Not Specified"]
+_pings2 = ["All", "Important", "Non"]
 @bot.command(pass_context=True)
-async def channels(ctx):
+async def info(ctx):
 	if ctx.message.author.id == "379303619545137152":
-		embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n"+"\n\n".join(_channels2)+" ",colour=0x000000)
+		embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n\n"+"\n\n".join(_channels2)+" ",colour=0x000000)
+		embed2 = discord.Embed(title="Channels",description="**Here you can find all of the genders available for you to assign:**\n\n"+"\n\n".join(_genders2)+" ",colour=0x000000)
+		embed3 = discord.Embed(title="Channels",description="**Here you can find all of the pings available for you to assign:**\n\n"+"\n\n".join(_pings2)+" ",colour=0x000000)
 		await bot.say(embed=embed)
+		await bot.say(embed=embed2)
+		await bot.say(embed=embed3)
+		
 	
 
 #----------------------------------------------------------------------------------------------------------
