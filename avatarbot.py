@@ -19,7 +19,7 @@ bot.remove_command('help')
 @bot.command(pass_context=True)
 async def help(ctx,*,command=None):
 	if ctx.message.author.id == "379303619545137152":
-		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
+		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. channel - Choose your channels!\n3.setmy - Set your gender and pings!\n\nRemember if you need any help with these command you can type `;help [command]` to find out more!",colour = 0x000000)
 		await bot.say(embed=embed)
 	elif ctx.message.author.id != "379303619545137152" and command is None:
 		await bot.say("Hey "+ctx.message.author.mention+"! Use this -> <#469486865305698304>")
