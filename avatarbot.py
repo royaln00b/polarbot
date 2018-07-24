@@ -109,10 +109,14 @@ async def setmy(ctx,action,*,selection):
 	failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+selection+"` Could not be found. Please try again.",colour=0xFF0000)
 	if action == "gender":
 		if selection.lower() in _gender:
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="male"))
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="female"))
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="transgender"))
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="not specified"))
+			if "male" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="male"))
+			if "female" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="female"))
+			if "transgender" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="transgender"))
+			if "not specified" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="not specified"))
 			await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
 			await bot.add_reaction(message = ctx.message, emoji = "✅")
 		else:
