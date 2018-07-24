@@ -123,14 +123,23 @@ async def setmy(ctx,action,*,selection):
 			await bot.say(embed=failembed)
 	elif action == "pings":
 		if selection.lower() in _pingist:
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="all"))
-			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="important"))
+			if "all" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="all"))
+			if "important" in [y.name.lower() for y in ctx.message.author.roles]:
+				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="important"))
 			if selection.lower() == "all":
 				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
 				await bot.add_reaction(message = ctx.message, emoji = "✅")
 			elif selection.lower() == "important":
 				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
 				await bot.add_reaction(message = ctx.message, emoji = "✅")
+			elif selection.lower() == "non":
+				if "all" in [y.name.lower() for y in ctx.message.author.roles]:
+					await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="all"))
+				if "important" in [y.name.lower() for y in ctx.message.author.roles]:
+					await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="important"))
+				await bot.add_reaction(message = ctx.message, emoji = "✅")
+				
 		else:
 			await bot.say(embed=failembed)
 				
