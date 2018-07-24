@@ -17,12 +17,22 @@ bot.remove_command('help')
 
 
 @bot.command(pass_context=True)
-async def help(ctx):
+async def help(ctx,*,command=None):
 	if ctx.message.author.id == "379303619545137152":
 		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. unsub - Unsubscribe from notifications\n3. sub - Subscribe to notifications\n4. channel - Choose your channels!",colour = 0xEE82EE)
 		await bot.say(embed=embed)
-	else:
+	elif ctx.message.author.id != "379303619545137152" and command is None:
 		await bot.say("Hey "+ctx.message.author.mention+"! Use this -> <#469486865305698304>")
+	elif command == "suggest":
+		await bot.send_message(ctx.message.author,"`;suggest [command to be added]`")
+	elif command == "avatar":
+		await bot.send_message(ctx.message.author,"`;avatar [member]`")
+	elif command == "8ball":
+		await bot.send_message(ctx.message.author,"`;8ball [question]`")
+	elif command == "channel":
+		await bot.send_message(ctx.message.author,"`;channel [add/remove] [channel]`")
+	elif command == "setmy":
+		await bot.send_message(ctx.message.author,"`;setmy [gender/pings] [selection]`")
 
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -48,17 +58,6 @@ async def avatar(ctx,*, user:discord.Member=None):
    embed = discord.Embed (color=0xff0000)
    embed.set_image(url=user.avatar_url)
    await bot.say(embed=embed)
-
-
-@bot.command(pass_context=True)
-async def unsub(ctx):
-	await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("Members")))
-	await bot.say("<@"+str(ctx.message.author.id)+"> you have unsubbed from notifications !")
-
-@bot.command(pass_context=True)
-async def sub(ctx):
-	await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str("Members")))
-	await bot.say("<@"+str(ctx.message.author.id)+"> you have subbed to notifications !")
 
 @bot.event
 async def on_member_join(member):
@@ -102,6 +101,39 @@ async def channel(ctx,action,*,channel):
 	elif action != "remove":
 		if action != "add":
 			await bot.say(embed = failembed)
+#					       AUTO ASSIGN GENDER AND PINGS
+_gender = ["male","female","transgender","not specified"]
+_pinglist = ["all","non","important"]
+@bot.command(pass_context=True)
+async def setmy(ctx,action,*,selection):
+	failembed=discord.Embed(title="ERROR",description="`"+action+"` or "+"`"+selection+"` Could not be found. Please try again.",colour=0xFF0000)
+	if action == "gender":
+		if selection.lower() in _gender:
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="male"))
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="female"))
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="transgender"))
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="not specified"))
+			await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
+			await bot.add_reaction(message = ctx.message, emoji = "✅")
+		else:
+			await bot.say(embed=failembed)
+	elif action == "pings":
+		if selection.lower() in _pingist:
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="all"))
+			await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="important"))
+			if selection.lower() == "all":
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
+				await bot.add_reaction(message = ctx.message, emoji = "✅")
+			elif selection.lower() == "important":
+				await bot.add_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name=str(selection.lower())))
+				await bot.add_reaction(message = ctx.message, emoji = "✅")
+		else:
+			await bot.say(embed=failembed)
+				
+	
+	else:
+		await bot.say(embed=failembed)
+
 
 #                                              LIST OF ALL CHANNELS THAT CAN BE ASSIGNED
 
