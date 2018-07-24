@@ -122,7 +122,7 @@ async def setmy(ctx,action,*,selection):
 		else:
 			await bot.say(embed=failembed)
 	elif action == "pings":
-		if selection.lower() in _pingist:
+		if selection.lower() in _pinglist:
 			if "all" in [y.name.lower() for y in ctx.message.author.roles]:
 				await bot.remove_roles(ctx.message.author,discord.utils.get(ctx.message.server.roles,name="all"))
 			if "important" in [y.name.lower() for y in ctx.message.author.roles]:
