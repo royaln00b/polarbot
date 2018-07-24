@@ -19,7 +19,7 @@ bot.remove_command('help')
 @bot.command(pass_context=True)
 async def help(ctx,*,command=None):
 	if ctx.message.author.id == "379303619545137152":
-		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. channel - Choose your channels!\n3.setmy - Set your gender and pings!\n\nRemember if you need any help with these command you can type `;help [command]` to find out more!",colour = 0x000000)
+		embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n2. channel - Choose your channels!\n3. setmy - Set your gender and pings!\n4. 8ball - Ask the 8ball a question!\n\nRemember if you need any help with these command you can type `;help [command]` to find out more!",colour = 0x000000)
 		await bot.say(embed=embed)
 	elif ctx.message.author.id != "379303619545137152" and command is None:
 		await bot.say("Hey "+ctx.message.author.mention+"! Use this -> <#469486865305698304>")
@@ -189,10 +189,6 @@ async def purge(ctx,num: int):
 @bot.event
 async def on_ready():
 	await bot.change_presence(game=discord.Game(type=0, name=';help'))
-	embed=discord.Embed(title="Command List" , description= "1 . ping - Shows latency of the bot\n\n2. unsub - Unsubscribe from notifications\n\n3. sub - Subscribe to notifications\n\n4. channel - Choose your channels!\n  ;channel [add/remove] [channel]",colour = 0x000000)
-	await bot.send_message(469486865305698304,embed=embed)
-	embed = discord.Embed(title="Channels",description="**Here you can find all of the channels available for you to access:**\n"+"\n\n".join(_channels2)+" ",colour=0x000000)
-	await bot.send_message(message.server.get_channel("469486865305698304"),embed=embed)
 
 token = os.getenv('TOKEN')
 bot.run(token)
